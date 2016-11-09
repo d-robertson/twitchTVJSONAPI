@@ -1,0 +1,26 @@
+body {
+  font-family: 'Space Mono', monospace;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.title {
+  width: 100%;
+  background-color: grey;
+  /*height: 200%;*/
+  padding: 10px 10px 10px 10px;
+}
+
+.stream {
+  width: 100%;
+  background-color: steelblue;
+  padding: 10px 10px 10px 10px;
+}
+
+.container {
+  margin-left: 0px;
+  margin-right: 0px;
+}
