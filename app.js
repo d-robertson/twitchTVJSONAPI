@@ -44,17 +44,20 @@ angular.module('twitchApp', [])
         // console.log('success: ', res.data);
         console.log('in http: ', title);
         var status = '';
+        var img = '';
 
         if(res.data.stream === null){
           status = 'Offline';
+          img = 'https://static-cdn.jtvnw.net/jtv_user_pictures/ratedmgl-profile_image-265b33ec1dc201e4-300x300.png'
         } else {
           status = 'Online';
+          img = res.data.stream.channel.logo;
         }
-
         var stream = {
           streamTitle: title,
           status: status,
-          data: res.data
+          data: res.data,
+          img: img
         }
 
         console.log('streamObj: ', stream);
@@ -70,6 +73,5 @@ angular.module('twitchApp', [])
 
       }); 
     }
-    console.log('fullStreams: ', fullStreams);
   }
 }]);
