@@ -25,6 +25,42 @@ angular.module('twitchApp', [])
   $scope.addSearch = function(){
     $scope.streams.push($scope.search);
     $scope.search = '';
+
+    var req = {
+      url: 'https://api.twitch.tv/kraken/streams/' + $scope.streams[$scope.streams.length - 1],
+      params: {
+        client_id: 'gh4p8qnbrzxx1au8hnphujd0n5n34b5'
+      }
+    }
+
+    var title = $scope.streams[$scope.streams.length - 1];
+
+    $http(req).then(function success(res){
+      
+      var status = '';
+      var img = '';
+
+      if(res.data.stream === null){
+        status = 'Offline';
+        img = 'https://static-cdn.jtvnw.net/jtv_user_pictures/ratedmgl-profile_image-265b33ec1dc201e4-300x300.png'
+      } else {
+        status = 'Online';
+        img = res.data.stream.channel.logo;
+      }
+      var stream = {
+        streamTitle: title,
+        status: status,
+        data: res.data,
+        img: img
+      }
+
+      console.log('streamObj: ', stream);
+
+      $scope.fullStreams.push(stream);
+
+    }, function error(res){
+      console.log('error: ', res);
+    });
   }
 
   $scope.twitchReq = function(){
@@ -74,4 +110,6 @@ angular.module('twitchApp', [])
       }); 
     }
   }
+
+  $scope.twitchReq();
 }]);
