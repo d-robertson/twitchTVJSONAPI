@@ -63,6 +63,10 @@ angular.module('twitchApp', [])
     });
   }
 
+  $scope.deleteItem = function(idx){
+    $scope.fullStreams.splice(idx, 1);
+  }
+
   $scope.twitchReq = function(){
     if($scope.streams.length - 1 >= $scope.counter){
       var req = {
