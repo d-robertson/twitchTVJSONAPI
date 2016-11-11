@@ -30,16 +30,21 @@
     <div class="col-xs-12">
       <div class="col-xs-10 col-xs-offset-1">
         <div class="title row">
-          <span class="col-xs-8">
-            <h1>Twitch Streams</h1>  
+          <span class="col-xs-6">
+            <h1 class="titleText">Twitch Streams</h1>  
+          </span>
+          <span class="col-xs-2 btnSpan">
+            <button class="btn btn-success titleBtn" ng-click="online()">Online</button>
+            <button class="btn btn-danger titleBtn" ng-click="offline()">Offline</button>
+            <button class="btn btn-info titleBtn" ng-click="all()">All</button>
           </span>
           <span class="col-xs-2">
             <form ng-submit="addSearch()">
-              <input ng-model="search">
+              <input ng-model="search" type="search" placeholder="Add Twitch Stream">
             </form>
           </span>
         </div>
-        <div class="row stream" ng-repeat="stream in fullStreams track by $index">
+        <div class="row stream" ng-repeat="stream in fullStreams | filter: filter">
           <div class="col-xs-2">
             <img src="{{stream.img}}">
           </div>
@@ -49,9 +54,10 @@
           <div class="col-xs-3">
            <h2 ng-if="stream.status === 'Offline'" class="offline">{{stream.status}}</h2>
            <h2 ng-if="stream.status === 'Online'" class="online">{{stream.status}}</h2>
+           <h2 ng-if="stream.status === 'Not Found!'" class="notFound">{{stream.status}}</h2>
           </div>
           <div class="col-xs-1">
-            <button class="btn" ng-click="deleteItem($index)">X</button>
+            <button class="btn btn-danger deleteBtn" ng-click="deleteItem($index)">X</button>
           </div>
         </div>
         <div id="player1"></div>
